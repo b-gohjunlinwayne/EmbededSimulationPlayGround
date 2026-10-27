@@ -1,0 +1,28 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "exportedAt": "2026-10-10T20:42:40.002Z",
+  "name": "sketch",
+  "boards": [
+    {
+      "id": "arduino-uno",
+      "boardKind": "arduino-uno",
+      "x": 408.0246913580247,
+      "y": -128.3264746227709,
+      "activeFileGroupId": "group-arduino-uno",
+      "languageMode": "arduino",
+      "serialBaudRate": 0
+    }
+  ],
+  "fileGroups": {
+    "group-arduino-uno": [
+      {
+        "name": "sketch.ino",
+        "content": "// Morse Code LED Example\n/*\n  More code :\n  Dash = 3 * dot duration\n  Space = 7 * dot duration\n  Dot = dot duration\n  Between Symbols = 3 * dot duration\n  Between Words = 7 * dot duration(see space)\n*/\nconst int c_blinkDurationDot = 100;\nconst int c_blinkDurationDash = c_blinkDurationDot * 3;\nconst int c_blinkDurationSymbol = c_blinkDurationDot * 3;\nconst int c_blinkDurationSpace = c_blinkDurationDot * 7;\nconst unsigned int c_ledPin = 13;\n\n//store morse code\nconst int Letters[26][4] =\n{\n  //A\n  {1,2,0,0},\n  //B\n  {2,1,1,1},\n  //C\n  {2,1,2,1},\n  //D\n  {2,1,1,0},\n  //E\n  {1,0,0,0},\n  //F\n  {1,1,2,1},\n  //G\n  {2,2,1,0},\n  //H\n  {1,1,1,1},\n  //I\n  {1,1,0,0},\n  //J\n  {1,2,2,2},\n  //K\n  {2,1,2,0},\n  //L\n  {1,2,1,1},\n  //M\n  {2,2,0,0},\n  //N\n  {2,1,0,0},\n  //O\n  {2,2,2,0},\n  //P\n  {1,2,2,1},\n  //Q\n  {2,2,1,2},\n  //R\n  {1,2,1,0},\n  //S\n  {1,1,1,0},\n  //T\n  {2,0,0,0},\n  //U\n  {1,1,2,0},\n  //V\n  {1,1,1,2},\n  //W\n  {1,2,2,0},\n  //X\n  {2,1,1,2},\n  //Y\n  {2,1,2,2},\n  //Z\n  {2,2,1,1}\n};\n\nchar message[] = {'H','E','L','L','O',' ','W','O','R','L','D',-1};\n\nvoid setup() {\n  pinMode(c_ledPin, OUTPUT);\n}\n\nvoid Blink(int Duration){\n  digitalWrite(c_ledPin,HIGH);\n  delay(Duration);\n  digitalWrite(c_ledPin,LOW);\n}\n\nvoid DisplayCode(char Letter)\n{\n  if(Letter > 'Z' || Letter < 'A')\n  {\n    return;\n  }\n  const int resultingArrayIndex = Letter - 'A';\n  for(int i = 0; i < 4; ++i)\n  {\n    const int currentLetterMorse = Letters[resultingArrayIndex][i];\n    if(currentLetterMorse == 0)\n    {\n      return;\n    }\n    else if(currentLetterMorse == 1)\n    {\n        Blink(c_blinkDurationDot);\n    }\n    else if(currentLetterMorse == 2)\n    {\n        Blink(c_blinkDurationDash);\n    }\n    //condition between dots\n    else if(i < 3)\n    {\n      delay(c_blinkDurationDot);\n    }\n  }\n}\n\nvoid loop() {\n  int index = 0;\n  while(message[index] != -1)\n  {\n    if(message[index] == ' ')\n    {\n      delay(c_blinkDurationSpace);\n    }\n    else\n    {\n      DisplayCode(message[index]);\n      if(message[index + 1] != -1 && message[index+1] != ' ')\n      {\n        delay(c_blinkDurationSymbol);\n      }\n    }\n    ++index;\n  }\n}"
+      }
+    ]
+  },
+  "components": [],
+  "wires": [],
+  "activeBoardId": "arduino-uno"
+}

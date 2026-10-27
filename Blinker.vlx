@@ -1,0 +1,27 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "exportedAt": "2026-10-10T19:17:41.002Z",
+  "boards": [
+    {
+      "id": "arduino-uno",
+      "boardKind": "arduino-uno",
+      "x": 408.0246913580247,
+      "y": -128.3264746227709,
+      "activeFileGroupId": "group-arduino-uno",
+      "languageMode": "arduino",
+      "serialBaudRate": 0
+    }
+  ],
+  "fileGroups": {
+    "group-arduino-uno": [
+      {
+        "name": "sketch.ino",
+        "content": "// Blink LED Example\n// Toggles the built-in LED on pin 13\n\nconst int c_blinkQuickDuration = 50;\nconst int c_blinkSlowDuration = 500;\nconst unsigned int c_ledPin = 13;\n\nvoid setup() {\n  pinMode(c_ledPin, OUTPUT);\n}\n\nvoid Blink(int Duration){\n  digitalWrite(c_ledPin,HIGH);\n  delay(Duration);\n  digitalWrite(c_ledPin,LOW);\n  delay(Duration);\n}\n\nvoid loop() {\n  for(int i = 0; i < 2; ++i)\n  {\n    Blink(c_blinkQuickDuration);\n  }\n  for(int i = 0; i < 2; ++i)\n  {\n    Blink(c_blinkSlowDuration);\n  }\n  delay(2000);\n}"
+      }
+    ]
+  },
+  "components": [],
+  "wires": [],
+  "activeBoardId": "arduino-uno"
+}
